@@ -82,12 +82,21 @@ function showEmptyNeighbors(indexI, indexJ) {
 
 function cellClicked(elCell, i, j) {
     if (gGames.isOn) {
+
         if (!gIsTimerOn) {
             TimerInterval = setInterval(timer, 1000);
             gIsTimerOn = true;
         }
         if (gBoard[i][j].isMine) {
             gGames.isOn = false;
+            // if (gGames.isLifeModeOn) {
+            //     if (gGames.lifeCount > 0) {
+            //         elCell.innerHTML = MINE;
+            //         gBoard[i][j].isShown = true;
+            //         gGames.lifeCount--;
+            //         return;
+            //     }
+            // }
             showMines();
             clearInterval(TimerInterval);
             checkGameOver();
@@ -95,17 +104,24 @@ function cellClicked(elCell, i, j) {
             renderCell({ i, j }, ' ');
             gGames.score++;
             gElScore.innerHTML = gGames.score;
-            showEmptyNeighbors(i, j);
+            if (gIsFirstMove) {
+                gIsFirstMove = false;
+                showEmptyNeighbors(i, j);
+            }
         } else if (gBoard[i][j].minesAroundCount > 0) {
             renderCell({ i, j }, gBoard[i][j].minesAroundCount);
             gGames.score++;
             gElScore.innerHTML = gGames.score;
         }
+
         checkGameOver()
         gElMineCounter.innerHTML = gLevels[gCurrLvl].mines - gGames.markedCount;
     }
 }
 
+// function lifeMode() {
+//     gGames.isLifeModeOn = (!gGames.isLifeModeOn) ? true : false;
+// }
 
 function checkGameOver() {
     var isOver = false;
@@ -164,6 +180,8 @@ function showAll() {
 
 function resetGame(i) {
     gIsTimerOn = false;
+    gGames.isLifeModeOn = false;
+    gGames.lifeCount = 3;
     gGames.isOn = true;
     gGames.score = 0;
     gGames.secPassed = 0;
@@ -177,5 +195,7 @@ function resetGame(i) {
     gElScore.innerHTML = '';
     gElMineCounter.innerHTML = '';
     gGames.markedCount = 0;
+    var elWin = document.querySelector('.victory');
+    elWin.style.display = 'none';
 }
 // function cellMarked(elCell) {

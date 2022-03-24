@@ -22,6 +22,31 @@ div {
     transition: 0.5s;
 }
 
+.life {
+    position: absolute;
+    width: 80px;
+    height: 50px;
+    margin-left: 50px;
+    font-size: 20px;
+    margin-bottom: 15px;
+    border-radius: 5%;
+    background-image: linear-gradient(lightgray, grey);
+    display: none;
+}
+
+.lifecount {
+    position: absolute;
+    display: inline;
+    font-size: 45px;
+    /* left: 150px; */
+    width: 80px;
+    height: 50px;
+    margin-top: 50px;
+    margin-left: 50px;
+    margin-bottom: 25px;
+    display: none;
+}
+
 .info {
     display: inline-block;
     background-image: radial-gradient(lightgray, grey);

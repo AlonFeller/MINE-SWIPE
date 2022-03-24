@@ -12,12 +12,15 @@ var gLevels = [{ size: 4, mines: 3 }, { size: 10, mines: 15 }, { size: 16, mines
 var gCurrLvl = 0;
 var gGames = {
     isOn: false,
+    // isLifeModeOn: false,
+    // lifeCount: 3,
     shownCount: 0,
     markedCount: 0,
     score: 0,
     secPassed: 0,
     minPassed: 0
 };
+var gIsFirstMove = true;
 var gIsTimerOn = false;
 var TimerInterval;
 var textColorInterval;
@@ -41,8 +44,8 @@ function initGame(i) {
     // console.log(i);
     // console.log(gLevels[gCurrLvl].size);
     gBoard = buildBoard(gLevels[gCurrLvl].size);
-    generateMines(gLevels[gCurrLvl].mines);
-    setMinesNegsCount(gBoard);
+    // generateMines(gLevels[gCurrLvl].mines);
+    // setMinesNegsCount(gBoard);
     printMat(gBoard);
     var elBody = document.querySelector('body');
     bodyColorInterval = setInterval(function() {
