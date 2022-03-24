@@ -28,6 +28,9 @@ var bodyColorInterval;
 var gMines = [];
 const MINE = '💣';
 const FLAG = '🚩';
+var gElEasyBtn = document.querySelector('.easy');
+var gElNormalBtn = document.querySelector('.normal');
+var gElHardBtn = document.querySelector('.hard');
 var gElTimer = document.querySelector('.timer');
 var gElScore = document.querySelector('.score');
 var gElMineCounter = document.querySelector('.minesLeft');
@@ -38,14 +41,14 @@ noContext.addEventListener('contextmenu', e => {
 });
 
 function initGame(i) {
-
+    renderBtns(i);
     resetGame(i)
     if (i || i === 0) { gCurrLvl = i }
     // console.log(i);
     // console.log(gLevels[gCurrLvl].size);
     gBoard = buildBoard(gLevels[gCurrLvl].size);
-    // generateMines(gLevels[gCurrLvl].mines);
-    // setMinesNegsCount(gBoard);
+    generateMines(gLevels[gCurrLvl].mines);
+    setMinesNegsCount(gBoard);
     printMat(gBoard);
     var elBody = document.querySelector('body');
     bodyColorInterval = setInterval(function() {

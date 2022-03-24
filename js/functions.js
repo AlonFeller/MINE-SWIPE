@@ -82,7 +82,6 @@ function showEmptyNeighbors(indexI, indexJ) {
 
 function cellClicked(elCell, i, j) {
     if (gGames.isOn) {
-
         if (!gIsTimerOn) {
             TimerInterval = setInterval(timer, 1000);
             gIsTimerOn = true;
@@ -104,16 +103,12 @@ function cellClicked(elCell, i, j) {
             renderCell({ i, j }, ' ');
             gGames.score++;
             gElScore.innerHTML = gGames.score;
-            if (gIsFirstMove) {
-                gIsFirstMove = false;
-                showEmptyNeighbors(i, j);
-            }
+            showEmptyNeighbors(i, j);
         } else if (gBoard[i][j].minesAroundCount > 0) {
             renderCell({ i, j }, gBoard[i][j].minesAroundCount);
             gGames.score++;
             gElScore.innerHTML = gGames.score;
         }
-
         checkGameOver()
         gElMineCounter.innerHTML = gLevels[gCurrLvl].mines - gGames.markedCount;
     }
@@ -170,9 +165,9 @@ function showAll() {
     for (var i = 0; i < gBoard.length; i++) {
         for (var j = 0; j < gBoard.length; j++) {
             if (!gBoard[i][j].isShown) {
+                if (gBoard[i][j].isMine) renderCell({ i, j }, MINE);
                 if (gBoard[i][j].minesAroundCount > 0) renderCell({ i, j }, gBoard[i][j].minesAroundCount);
                 if (gBoard[i][j].minesAroundCount === 0) renderCell({ i, j }, ' ')
-                if (gBoard[i][j].isMine) renderCell({ i, j }, MINE);
             }
         }
     }
@@ -199,3 +194,47 @@ function resetGame(i) {
     elWin.style.display = 'none';
 }
 // function cellMarked(elCell) {
+
+function renderBtns(i) {
+    if (i === 0) {
+        gElEasyBtn.classList.add('active');
+        gElNormalBtn.classList.remove('active');
+        gElHardBtn.classList.remove('active');
+    } else if (i === 1) {
+        gElEasyBtn.classList.remove('active');
+        gElNormalBtn.classList.add('active');
+        gElHardBtn.classList.remove('active');
+    } else if (i === 2) {
+        gElEasyBtn.classList.remove('active');
+        gElNormalBtn.classList.remove('active');
+        gElHardBtn.classList.add('active');
+    }
+}
+
+// יש באג שצריך לתקן
+// function getEmptyCell() {
+//     var emptyCell = { i: 0, j: 0 };
+//     var indexI = getRandomIntInclusive(0, gBoard.length - 1);
+//     var indexJ = getRandomIntInclusive(0, gBoard.length - 1);
+//     var isCellMine = gBoard[indexI][indexJ].isMine;
+//     if (!isCellMine) {
+//         for (var i = indexI - 1; i < indexI + 1; i++) {
+//             for (var j = indexJ - 1; j < indexJ + 1; j++) {
+//                 if (i < 0) continue;
+//                 if (j < 0) continue;
+//                 if (i > gBoard.length) continue;
+//                 if (j > gBoard[0].length) continue;
+//                 if (gBoard[i][j].isMine) continue;
+//                 emptyCell.i = i;
+//                 emptyCell.j = j;
+//                 if (gBoard[i][j].minesAroundCount === 0) {
+//                     renderCell(emptyCell, '');
+//                     setTimeout(renderShownCell, 1500, emptyCell, '');
+//                 } else {
+//                     renderCell(emptyCell, gBoard[i][j].minesAroundCount);
+//                     setTimeout(renderShownCell, 1500, emptyCell, '');
+//                 }
+//             }
+//         }
+//     } else generateMine()
+// }

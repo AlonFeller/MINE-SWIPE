@@ -38,10 +38,20 @@ function printMat(mat) {
 
 function renderCell(location, value) {
     var elCell = document.querySelector(`.cell-${location.i}-${location.j}`);
-    gBoard[location.i][location.j].isShown = true;
-    elCell.innerHTML = value;
-    elCell.style.backgroundImage = 'linear-gradient(grey,lightgray)';
-    gBoard[location.i][location.j].isShown = true;
+    if (!gBoard[location.i][location.j].isShown) {
+        gBoard[location.i][location.j].isShown = true;
+        elCell.innerHTML = value;
+        elCell.style.backgroundImage = 'linear-gradient(grey,lightgray)';
+    }
+}
+
+function renderShownCell(location, value) {
+    var elCell = document.querySelector(`.cell-${location.i}-${location.j}`);
+    if (gBoard[location.i][location.j].isShown) {
+        gBoard[location.i][location.j].isShown = false;
+        elCell.innerHTML = '';
+        elCell.style.backgroundImage = 'linear-gradient(lightgray,grey)';
+    }
 }
 
 function getRandomInt(min, max) {
@@ -78,35 +88,3 @@ function timer() {
     var strHTML = `${gGames.minPassed}:${gGames.secPassed}`;
     gElTimer.innerHTML = strHTML;
 }
-
-// function updateScore(diff) {
-//     gGame.score += diff;
-//     document.querySelector('h2 span').innerText = gGame.score;
-// }
-
-// function handleKey(event) {
-
-//     var i = gGamerPos.i;
-//     var j = gGamerPos.j;
-
-
-//     switch (event.key) {
-//         case 'ArrowLeft':
-//             if (j === 0) moveTo(5, 12);
-//             else moveTo(i, j - 1);
-//             break;
-//         case 'ArrowRight':
-//             if (j === 12) moveTo(5, 0);
-//             else moveTo(i, j + 1);
-//             break;
-//         case 'ArrowUp':
-//             if (i === 0) moveTo(10, 6);
-//             else moveTo(i - 1, j);
-//             break;
-//         case 'ArrowDown':
-//             if (i === 10) moveTo(0, 6);
-//             else moveTo(i + 1, j);
-//             break;
-
-//     }
-// }
