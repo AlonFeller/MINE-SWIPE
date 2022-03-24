@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>document</title>
+    <link rel="stylesheet" href="css/app.css">
+</head>
+
+<body onload="initGame(0)" id="noContextMenu">
+    <h1>MineSwipe</h1>
+    <div class="info">
+        <div>timer:<span class="timer"></span></div>
+        <div>Score:<span class="score">0</span></div>
+        <div>Mines left:<span class="minesLeft"></span> </div>
+    </div>
+    <div class="victory">YOU WIN!!!</div>
+    <div>
+        <button class="restartbutton" onclick="initGame()">🙂</button>
+    </div>
+    <div class="levelbtns">
+        <button class="easy" onclick="initGame(0)">easy</button>
+        <button class="normal" onclick="initGame(1)">normal</button>
+        <button class="hard" onclick="initGame(2)">hard</button>
+    </div>
+    <div class="gameboard">
+    </div>
+
+
+    <script src="js/utils.js"></script>
+    <script src="js/functions.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
