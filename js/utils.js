@@ -80,11 +80,21 @@ function renderTime() {
 
 function timer() {
     gGames.secPassed++;
-    // console.log(gGames.secPassed);
+    var secStr;
+    var minStr;
     if (gGames.secPassed === 60) {
         gGames.secPassed = 0;
         gGames.minPassed++;
     }
-    var strHTML = `${gGames.minPassed}:${gGames.secPassed}`;
+    secStr = gGames.secPassed;
+    minStr = gGames.minPassed;
+    if (gGames.secPassed < 10) {
+        secStr = `0${gGames.secPassed}`;
+    }
+    if (gGames.minPassed < 10) {
+        minStr = `0${gGames.minPassed}`;
+    }
+
+    var strHTML = `${minStr}:${secStr}`;
     gElTimer.innerHTML = strHTML;
 }
